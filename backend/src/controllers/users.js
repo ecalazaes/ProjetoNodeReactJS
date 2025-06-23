@@ -1,14 +1,14 @@
-import UserDataAccess from "../dataAccess/users.js";
+import UserService from "../services/users.js";
 import { ok, serverError } from "../helpers/httpResponse.js"
 
-export default class UsersControllers {
+export default class UsersController {
     constructor() {
-        this.dataAccess = new UserDataAccess();
+        this.service = new UserService();
     }
 
     async getUsers() {
         try {
-            const users = await this.dataAccess.getUsers();
+            const users = await this.service.getUsers();
             return ok(users);
         } catch (error){
             return serverError(error);
@@ -17,7 +17,7 @@ export default class UsersControllers {
 
     async deleteUser(userId) {
         try {
-            const result = await this.dataAccess.deleteUser(userId);
+            const result = await this.service.deleteUser(userId);
             return ok(result);
         } catch (error){
             return serverError(error);
@@ -26,7 +26,7 @@ export default class UsersControllers {
 
     async updateUser(userID, userData) {
         try {
-            const result = await this.dataAccess.updateUser(userID, userData);
+            const result = await this.service.updateUser(userID, userData);
             return ok(result);
         } catch (error){
             return serverError(error);
