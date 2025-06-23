@@ -3,6 +3,7 @@ import {LuMenu, LuShoppingCart} from "react-icons/lu";
 import {LiaUserCircle} from "react-icons/lia";
 import {Drawer} from "@mui/material";
 import {useState} from "react";
+import {Link} from "react-router-dom";
 
 export default function Navbar() {
 
@@ -14,12 +15,19 @@ export default function Navbar() {
 
     return (<nav className={styles.navbarContainer}>
         <div className={styles.navbarItems}>
-            <img className={styles.logo} src="/logo.png" alt=""/>
+            <Link to={'/'}>
+                <img className={styles.logo} src="/logo.png" alt=""/>
+            </Link>
+
             <div className={styles.navbarLinksContainer}>
-                <a className={styles.navbarLink} href="">Home</a>
-                <a className={styles.navbarLink} href="">Plates</a>
-                <LuShoppingCart className={styles.navbarLink}/>
-                <LiaUserCircle className={styles.navbarLink}/>
+                <Link to={'/'} className={styles.navbarLink}>Home</Link>
+                <Link to={'/plates'} className={styles.navbarLink}>Plates</Link>
+                <Link to={'/cart'}>
+                    <LuShoppingCart className={styles.navbarLink}/>
+                </Link>
+                <Link to={'/profile'}>
+                    <LiaUserCircle className={styles.navbarLink}/>
+                </Link>
             </div>
         </div>
 
@@ -38,9 +46,9 @@ export default function Navbar() {
 
         >
             <div className={styles.drawer}>
-                <a className={styles.navbarLink} href="">Home</a>
-                <a className={styles.navbarLink} href="">Plates</a>
-                <a className={styles.navbarLink} href="">Profile</a>
+                <Link to={'/'} className={styles.navbarLink}>Home</Link>
+                <Link to={'/plates'} className={styles.navbarLink}>Plates</Link>
+                <Link to={'/profile'} className={styles.navbarLink}>Profile</Link>
             </div>
         </Drawer>
 
