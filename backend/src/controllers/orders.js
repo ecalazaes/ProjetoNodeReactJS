@@ -15,6 +15,15 @@ export default class OrdersController {
         }
     }
 
+    async getOrdersByUserId(userId) {
+        try {
+            const orders = await this.service.getOrdersByUserId(userId);
+            return ok(orders);
+        } catch (error){
+            return serverError(error);
+        }
+    }
+
     async addOrder(orderData) {
         try {
             const result = await this.service.addOrder(orderData);
