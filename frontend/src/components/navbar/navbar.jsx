@@ -16,7 +16,7 @@ export default function Navbar() {
     return (<nav className={styles.navbarContainer}>
         <div className={styles.navbarItems}>
             <Link to={'/'}>
-                <img className={styles.logo} src="/logo.png" alt=""/>
+                <img className={styles.logo} src="/imgs/logo.png" alt=""/>
             </Link>
 
             <div className={styles.navbarLinksContainer}>
@@ -33,7 +33,7 @@ export default function Navbar() {
 
         <div className={styles.mobileNavbarItems}>
             <Link to={'/'}>
-                <img className={styles.logo} src="/logo.png" alt=""/>
+                <img className={styles.logo} src="/imgs/logo.png" alt=""/>
             </Link>
             <div className={styles.mobileNavBarBtns}>
                 <Link to={'/cart'}>
