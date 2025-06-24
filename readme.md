@@ -1,3 +1,11 @@
+# Para rodar o projeto
+- clonar o repositório, rodar no vscode ou outra IDE.
+- o projeto está dividido em Backend e Frontend.
+- Depois de clonar, abra o backend e faça no terminal npm install + npm run dev.
+- Depois de clonar, abra o frontend e faça no terminal npm install + npm run dev.
+- Realizar cadastro no frontend na página http://localhost:5173/auth
+- Depois pode adicionar pratos e fechar o pedido
+
 # Resumo BackEnd
 
 - `src/index.js`: É o ponto de entrada da aplicação backend. Normalmente, inicializa o servidor, configura middlewares e importa as rotas principais.
