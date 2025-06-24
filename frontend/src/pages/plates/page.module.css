@@ -5,6 +5,12 @@
     padding: 0.5em;
 }
 
+.teste {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+
 
 @media screen and (max-width: 1000px) {
     .cardsContainer {

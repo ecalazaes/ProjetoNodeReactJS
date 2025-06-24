@@ -46,6 +46,7 @@ export default function Profile() {
                             {order.pickupStatus === 'Completed' ? <p className={`${styles.pickupStatus} ${styles.completed}`}><LuCircleCheckBig />{order.pickupStatus}</p> : null }
                             {order.pickupStatus === 'Canceled' ? <p className={`${styles.pickupStatus} ${styles.canceled}`}><LuCircleAlert />{order.pickupStatus}</p> : null }
                             <h3>{order.pickUpTime}</h3>
+
                             {order.orderItems.map((item) => (
                                 <div key={item._id} className="item">
                                     <h4>{item.itemDetails[0].name}</h4>

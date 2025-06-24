@@ -9,8 +9,8 @@ import {useCartContext} from "../../contexts/useCartContext.jsx";
 export default function Plates() {
 
     const {getAvailablePlates, platesList, platesLoading, refetchPlates} = plateServices()
-    const [ plateSelected, setPlateSelected ] = useState(null);
-    const { addToCart } = useCartContext();
+    const [plateSelected, setPlateSelected] = useState(null);
+    const {addToCart} = useCartContext();
 
     useEffect(() => {
         if (refetchPlates) {
@@ -39,6 +39,14 @@ export default function Plates() {
 
     return (
         <>
+            <div className={styles.teste}>
+                <h2>From our kitchen to your table.</h2>
+                <p>A healthy and genuine kitchen, where expectional ingredients come together with a passion for
+                    taste. </p>
+                <p>With fresh and original proposals, we satisfy the desires of the whole family, from appetizers to
+                    desserts.</p>
+                <p>Discover our culinary excellence every day.</p>
+            </div>
             <div className={styles.cardsContainer}>
                 {platesList.map((plate) => (
                     <div key={plate._id} className={styles.cardContainer} onClick={() => {

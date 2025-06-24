@@ -31,14 +31,17 @@
 
 .pending {
     background-color: #d6c918;
+    padding: 0.5em;
 }
 
 .completed {
     background-color: #9ad618;
+    padding: 0.5em;
 }
 
 .canceled {
     background-color: #ce651a;
+    padding: 0.5em;
 }
 
 .platesLink {

@@ -1,7 +1,7 @@
 import {useCartContext} from "../../contexts/useCartContext.jsx";
 import styles from "./page.module.css";
 import {LuCircleMinus} from "react-icons/lu";
-import {useState} from "react";
+import {useState, useMemo} from "react";
 import ConfirmOrderPopup from "../../components/confirmOrderPopup/confirmOrderPopup.jsx";
 import orderServices from "../../services/order.jsx";
 import {useNavigate} from "react-router-dom";
@@ -12,6 +12,12 @@ export default function Cart() {
     const [confirmPopupOpen, setConfirmPopupOpen] = useState(false)
     const { sendOrder } = orderServices()
     const navigate = useNavigate();
+
+    // 1. Calcular o total geral do carrinho
+    const cartTotal = useMemo(() => {
+        // Usa reduce para somar o (preço do item * quantidade do item) de cada item no carrinho
+        return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+    }, [cartItems]); // O total é recalculado toda vez que 'cartItems' muda
 
     const handleChangeItemQty = (mode, itemId) => {
         const updatedCartItem = cartItems.map((item) => {
@@ -78,7 +84,8 @@ export default function Cart() {
                                             </button>
                                         </div>
                                     </div>
-                                    <button onClick={() => {
+                                    <p>$ {(item.price * item.quantity).toFixed(2)}</p>
+                                    <button className={styles.removeBtn} onClick={() => {
                                         removeFromCart(item._id)
                                     }}><LuCircleMinus/> Remove item
                                     </button>
@@ -87,10 +94,12 @@ export default function Cart() {
                         ))}
                     </div>
                 </section>
-
-                <button className={styles.confirmeBtn} onClick={handleOpenPopup}>Confirm your order!</button>
+                {/* 2. Exibindo o total do pedido */}
+                <div className={styles.cartSummary}>
+                    <h2>Total do Pedido: $ {cartTotal.toFixed(2)}</h2> {/* <--- Aqui o total é exibido */}
+                    <button className={styles.confirmeBtn} onClick={handleOpenPopup}>Confirm your order!</button>
+                </div>
             </div>
-
             <ConfirmOrderPopup open={confirmPopupOpen} onClose={handleOpenPopup} onConfirm={handleConfirmOrder} />
         </>
     );
