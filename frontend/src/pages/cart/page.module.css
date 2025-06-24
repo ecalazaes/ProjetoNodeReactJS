@@ -20,7 +20,6 @@
 .pageContainer {
     display: flex;
     flex-direction: column;
-    /*align-items: center;*/
     gap: 2em;
 }
 
@@ -55,11 +54,19 @@
     background-color: #FF0000;
 }
 
-.cartContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1em;
-    padding: 2em;
+h1 {
+    text-align: center;
+}
+
+
+@media screen and (max-width: 768px) {
+    .itemContainer {
+        grid-template-columns: repeat(1, auto);
+        padding: 0.25em;
+    }
+
+    .itemContainer img {
+        width: 70%;
+        margin: auto;
+    }
 }
