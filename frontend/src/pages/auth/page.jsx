@@ -1,15 +1,36 @@
 import {useEffect, useState} from "react";
-import {TextField, Button} from "@mui/material";
+import {Button, TextField} from "@mui/material";
 import styles from "./page.module.css"
 import authServices from "../../services/auth.jsx";
+import {useNavigate} from "react-router-dom";
 
 export default function Auth() {
     const [formType, setFormType] = useState('login');
-    const [formData, setFormData] = useState(null);
+    const [formData, setFormData] = useState({
+        fullname: '',
+        email: '',
+        password: '',
+        confirmpassword: ''
+    });
     const { login, signup, authLoading } = authServices()
+    const navigate = useNavigate();
+
+    const authData = JSON.parse(localStorage.getItem('auth'));
+
+    useEffect(() => {
+        if (authData) {
+            navigate('/profile')
+        }
+    }, [authData])
+
 
     const handleChangeFormType = () => {
-        setFormData(null);
+        setFormData({
+            fullname: '',
+            email: '',
+            password: '',
+            confirmpassword: ''
+        });
         if (formType === 'login') {
             setFormType('signup');
         } else {
@@ -29,14 +50,14 @@ export default function Auth() {
 
         switch (formType) {
             case 'login':
-                login(formData);
+                login({...formData});
                 break;
             case 'signup':
                 if (formData.password !== formData.confirmpassword) {
                     console.log('Passwords do not match!')
                     return
                 }
-                signup(formData);
+                signup({...formData});
                 break;
         }
     }
@@ -56,6 +77,7 @@ export default function Auth() {
                         label="Email"
                         type="email"
                         name="email"
+                        value={formData.email}
                         onChange={handleFormDataChange}
                     />
 
@@ -64,6 +86,7 @@ export default function Auth() {
                         label="password"
                         type="password"
                         name="password"
+                        value={formData.password}
                         onChange={handleFormDataChange}
                     />
                     <Button type="submit">Login</Button>
@@ -81,8 +104,9 @@ export default function Auth() {
                     <TextField
                         required
                         label="Fullname"
-                        type="fullname"
+                        type="text"
                         name="fullname"
+                        value={formData.fullname}
                         onChange={handleFormDataChange}
                     />
                     <TextField
@@ -90,6 +114,7 @@ export default function Auth() {
                         label="Email"
                         type="email"
                         name="email"
+                        value={formData.email}
                         onChange={handleFormDataChange}
                     />
                     <TextField
@@ -97,6 +122,7 @@ export default function Auth() {
                         label="password"
                         type="password"
                         name="password"
+                        value={formData.password}
                         onChange={handleFormDataChange}
                     />
                     <TextField
@@ -104,6 +130,7 @@ export default function Auth() {
                         label="Confirm Password"
                         type="password"
                         name="confirmpassword"
+                        value={formData.confirmpassword}
                         onChange={handleFormDataChange}
                     />
                     <Button type="submit">Signup</Button>

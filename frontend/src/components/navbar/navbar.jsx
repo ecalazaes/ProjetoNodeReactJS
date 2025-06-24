@@ -32,9 +32,13 @@ export default function Navbar() {
         </div>
 
         <div className={styles.mobileNavbarItems}>
-            <img className={styles.logo} src="/logo.png" alt=""/>
+            <Link to={'/'}>
+                <img className={styles.logo} src="/logo.png" alt=""/>
+            </Link>
             <div className={styles.mobileNavBarBtns}>
-                <LuShoppingCart className={styles.navbarLink}/>
+                <Link to={'/cart'}>
+                    <LuShoppingCart className={styles.navbarLink}/>
+                </Link>
                 <LuMenu className={styles.navbarLink} onClick={handleOpenMenu}/>
             </div>
         </div>
