@@ -1,8 +1,9 @@
 import {useEffect, useState} from "react";
-import {Button, TextField} from "@mui/material";
+import {TextField} from "@mui/material";
 import styles from "./page.module.css"
 import authServices from "../../services/auth.jsx";
 import {useNavigate} from "react-router-dom";
+import {LuLogIn} from "react-icons/lu";
 
 export default function Auth() {
     const [formType, setFormType] = useState('login');
@@ -12,7 +13,7 @@ export default function Auth() {
         password: '',
         confirmpassword: ''
     });
-    const { login, signup, authLoading } = authServices()
+    const {login, signup, authLoading} = authServices()
     const navigate = useNavigate();
 
     const authData = JSON.parse(localStorage.getItem('auth'));
@@ -62,7 +63,7 @@ export default function Auth() {
         }
     }
 
-    if(authLoading) {
+    if (authLoading) {
         return (<h1>Loading</h1>)
     }
 
@@ -89,7 +90,7 @@ export default function Auth() {
                         value={formData.password}
                         onChange={handleFormDataChange}
                     />
-                    <Button type="submit">Login</Button>
+                    <button type="submit">Login<LuLogIn/></button>
                 </form>
             </div>
         )
@@ -133,7 +134,7 @@ export default function Auth() {
                         value={formData.confirmpassword}
                         onChange={handleFormDataChange}
                     />
-                    <Button type="submit">Signup</Button>
+                    <button type="submit">Signup<LuLogIn/></button>
                 </form>
             </div>
         )

@@ -1,11 +1,14 @@
 import Navbar from "./components/navbar/navbar.jsx";
-import { Outlet } from "react-router-dom"
+import {Outlet} from "react-router-dom"
 
 export default function App() {
     return (
         <>
-            <Navbar />
-            <Outlet />
+            <Navbar/>
+            <main>
+
+                <Outlet/>
+            </main>
         </>
     )
 }
