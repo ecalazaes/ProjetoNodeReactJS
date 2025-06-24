@@ -1,5 +1,6 @@
 import {Dialog} from "@mui/material";
 import styles from "./platePopup.module.css"
+import {FaCartPlus} from "react-icons/fa";
 
 export default function PlatePopup({ plateData, onClose, onAddToCart }) {
 
@@ -12,7 +13,7 @@ export default function PlatePopup({ plateData, onClose, onAddToCart }) {
                     <p className={styles.ingredients}>[{String(plateData.ingredients)}]</p>
                     <p>{plateData.description}</p>
                     <h2>$ {plateData.price}</h2>
-                    <button onClick={() => { onAddToCart(plateData) }}>Add to cart</button>
+                    <button onClick={() => { onAddToCart(plateData) }}><FaCartPlus />Add to cart</button>
                 </div>
             </div>
         </Dialog>
