@@ -5,6 +5,7 @@ import PlateCard from "../../components/plateCard/plateCard.jsx";
 import styles from "./page.module.css"
 import PlatePopup from "../../components/platePopup/platePopup.jsx";
 import {useCartContext} from "../../contexts/useCartContext.jsx";
+import {toast} from "react-toastify";
 
 export default function Plates() {
 
@@ -29,6 +30,17 @@ export default function Plates() {
     const handleAddToCart = (itemToAdd) => {
         addToCart(itemToAdd)
         handleClosePopup()
+        // Sinalizar com mensagem verde de sucesso
+        toast.success(`${itemToAdd.name} adicionado ao carrinho!`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored", // Use 'colored' para a cor padrão do sucesso
+        });
     }
 
     if (platesLoading) {

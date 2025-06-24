@@ -39,7 +39,7 @@ export default function ConfirmOrderPopup({open, onClose, onConfirm}) {
         <Dialog open={open} onClose={onClose}>
             <div className={styles.popupContainer}>
                 <h2>We're almost there...</h2>
-                <p>Confirm your order with the current date: <strong>{(new Date()).toLocaleDateString()}</strong>. What
+                <p>Confirm your order with the current date: {(new Date()).toLocaleDateString()}. What
                     time will you come to pick up your order?</p>
                 <form className={styles.formContainer}>
                     <TextField

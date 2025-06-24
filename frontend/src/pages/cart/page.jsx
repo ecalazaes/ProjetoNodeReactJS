@@ -1,10 +1,11 @@
 import {useCartContext} from "../../contexts/useCartContext.jsx";
 import styles from "./page.module.css";
 import {LuCircleMinus} from "react-icons/lu";
-import {useState, useMemo} from "react";
+import {useMemo, useState} from "react";
 import ConfirmOrderPopup from "../../components/confirmOrderPopup/confirmOrderPopup.jsx";
 import orderServices from "../../services/order.jsx";
 import {Link, useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
 
 export default function Cart() {
 
@@ -31,6 +32,8 @@ export default function Cart() {
             return item;
         })
         updateCartItems(updatedCartItem)
+        // Opcional: Sinalizar mudança de quantidade
+        toast.info(`Quantidade de ${item.name} alterada!`);
     }
 
     const handleOpenPopup = (e) => {
@@ -45,6 +48,7 @@ export default function Cart() {
         sendOrder(orderData)
         setConfirmPopupOpen(!confirmPopupOpen)
         clearCart()
+        toast.success("Pedido realizado com sucesso!", { theme: "colored" });
         return navigate('/profile')
     }
 
