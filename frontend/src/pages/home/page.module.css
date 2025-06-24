@@ -31,6 +31,7 @@
 }
 
 .socialButton {
+    font-size: large;
     width: 100%;
 }
 
@@ -51,5 +52,11 @@
     .foodSection {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .socialButtonsContainer {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
