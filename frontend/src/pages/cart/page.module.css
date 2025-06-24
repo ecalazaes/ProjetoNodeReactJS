@@ -54,9 +54,15 @@
     background-color: #FF0000;
 }
 
-/*h1 {*/
-/*    text-align: center;*/
-/*}*/
+.cartContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    padding: 1em;
+
+}
 
 
 @media screen and (max-width: 768px) {
