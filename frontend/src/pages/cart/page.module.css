@@ -54,3 +54,12 @@
 .removeBtn {
     background-color: #FF0000;
 }
+
+.cartContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    padding: 2em;
+}

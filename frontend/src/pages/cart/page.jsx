@@ -4,13 +4,13 @@ import {LuCircleMinus} from "react-icons/lu";
 import {useState, useMemo} from "react";
 import ConfirmOrderPopup from "../../components/confirmOrderPopup/confirmOrderPopup.jsx";
 import orderServices from "../../services/order.jsx";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 export default function Cart() {
 
-    const {cartItems, updateCartItems, removeFromCart, clearCart } = useCartContext()
+    const {cartItems, updateCartItems, removeFromCart, clearCart} = useCartContext()
     const [confirmPopupOpen, setConfirmPopupOpen] = useState(false)
-    const { sendOrder } = orderServices()
+    const {sendOrder} = orderServices()
     const navigate = useNavigate();
 
     // 1. Calcular o total geral do carrinho
@@ -40,7 +40,7 @@ export default function Cart() {
 
     const handleConfirmOrder = (orderData) => {
         orderData.items = cartItems.map((item) => {
-            return { plateId: item._id, quantity: item.quantity }
+            return {plateId: item._id, quantity: item.quantity}
         })
         sendOrder(orderData)
         setConfirmPopupOpen(!confirmPopupOpen)
@@ -50,9 +50,11 @@ export default function Cart() {
 
     if (!cartItems.length) {
         return (
-            <div>
-                <h1> Your cart is empty... :/</h1>
-                <button>See our specialities!</button>
+            <div className={styles.cartContainer}>
+                <h1> Your cart is empty...!</h1>
+                <Link to={'/plates'}>
+                    <button>See our plates!</button>
+                </Link>
             </div>
         )
 
@@ -100,7 +102,7 @@ export default function Cart() {
                     <button className={styles.confirmeBtn} onClick={handleOpenPopup}>Confirm your order!</button>
                 </div>
             </div>
-            <ConfirmOrderPopup open={confirmPopupOpen} onClose={handleOpenPopup} onConfirm={handleConfirmOrder} />
+            <ConfirmOrderPopup open={confirmPopupOpen} onClose={handleOpenPopup} onConfirm={handleConfirmOrder}/>
         </>
     );
 }
