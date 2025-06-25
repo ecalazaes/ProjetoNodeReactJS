@@ -4,6 +4,7 @@ import styles from "./page.module.css"
 import authServices from "../../services/auth.jsx";
 import {useNavigate} from "react-router-dom";
 import {LuLogIn} from "react-icons/lu";
+import Loading from "../loading/page.jsx";
 
 export default function Auth() {
     const [formType, setFormType] = useState('login');
@@ -64,7 +65,7 @@ export default function Auth() {
     }
 
     if (authLoading) {
-        return (<h1>Loading</h1>)
+        return (<Loading/>)
     }
 
     if (formType === 'login') {
