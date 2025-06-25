@@ -1,11 +1,6 @@
 # Projeto MyGastronomy
 ## Um cardápio de restaurante, que permite que o usuário se cadastre e faça pedidos online.
 
-### Stacks:
-- Backend: Nodejs com Express no Backend
-- Banco de dados: MongoDB cloud
-- Frontend: Reactjs com vite
-
 ## Projeto com deploy na Azzure
 - backend: https://mygastrobackend.azurewebsites.net/
 - frontend: https://mygastrofrontend.azurewebsites.net/
@@ -13,6 +8,11 @@
 ## Se desejar baixar o projeto
 - Depois de clonar, abra o backend e faça no terminal npm install + npm run dev.
 - Depois de clonar, abra o frontend e faça no terminal npm install + npm run dev.
+
+### Stacks:
+- Backend: Nodejs com Express no Backend
+- Banco de dados: MongoDB cloud
+- Frontend: Reactjs com vite
 
 ## Users API
 
