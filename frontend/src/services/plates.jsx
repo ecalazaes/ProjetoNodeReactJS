@@ -5,7 +5,8 @@ export default function plateServices() {
     const [refetchPlates, setRefetchPlates] = useState(true);
     const [platesList, setPlatesList] = useState([]);
 
-    const url = 'http://localhost:3000/plates';
+    // const url = 'http://localhost:3000/plates';
+    const url = 'https://mygastrobackend.azurewebsites.net/plates';
 
     const getAvailablePlates = (userId) => {
         setPlateLoading(true)
