@@ -1,76 +1,231 @@
-# Para rodar o projeto MyGastronomy
-- clonar o repositório, rodar no vscode ou outra IDE.
-- o projeto está dividido em Backend e Frontend.
+# Projeto MyGastronomy
+## Um cardápio de restaurante, que permite que o usuário se cadastre e faça pedidos online.
+
+### Stacks:
+- Backend: Nodejs com Express no Backend
+- Banco de dados: MongoDB cloud
+- Frontend: Reactjs com vite
+
+## Projeto com deploy na Azzure
+- backend: https://mygastrobackend.azurewebsites.net/
+- frontend: https://mygastrofrontend.azurewebsites.net/
+
+## Se desejar baixar o projeto
 - Depois de clonar, abra o backend e faça no terminal npm install + npm run dev.
 - Depois de clonar, abra o frontend e faça no terminal npm install + npm run dev.
-- Realizar cadastro no frontend na página http://localhost:5173/auth
-- Depois pode adicionar pratos e fechar o pedido
 
-# Resumo BackEnd
+## Users API
 
-- `src/index.js`: É o ponto de entrada da aplicação backend. Normalmente, inicializa o servidor, configura middlewares e importa as rotas principais.
+### Listar todos os usuários
 
-- `src/auth/auth.js`: Responsável pela autenticação. Geralmente contém funções para login, verificação de tokens JWT, e proteção de rotas.
+- **Endpoint:** `GET /users`
+- **Descrição:** Retorna a lista de todos os usuários cadastrados.
+- **Resposta esperada:**
+  ```json
+  {
+    "success": true,
+    "statusCode": 200,
+    "body": [
+      {
+        "id": "1",
+        "name": "João Silva",
+        "email": "joao@email.com"
+      },
+      {
+        "id": "2",
+        "name": "Maria Oliveira",
+        "email": "maria@email.com"
+      }
+      // ...outros usuários
+    ]
+  }
 
-- `src/controllers/orders.js`, `src/controllers/plates.js`, `src/controllers/users.js`: Controladores que recebem as requisições das rotas, processam a lógica de negócio e retornam respostas. Cada um lida com uma entidade específica (pedidos, pratos, usuários).
+###  Deletar um usuário
 
-- `src/data/platesData.json`: Arquivo JSON que provavelmente armazena dados estáticos ou de exemplo sobre pratos.
+- **Endpoint:** `DELETE /users/:id`
+- **Parâmetros de URL:**
+  - `id` (string): ID do usuário
+- **Descrição:** Deleta um usuário pelo ID.
+- **Resposta esperada:**
+  ```json
+  {
+    "success": true,
+    "statusCode": 200,
+    "body": { "message": "Usuário deletado com sucesso." }
+  }
+  
+###  Atualizar um usuário
 
-- `src/database/mongo.js`: Faz a configuração e conexão com o banco de dados MongoDB.
+- **Endpoint:** `PUT /users/:id`
+- **Parâmetros de URL:**
+  - `id` (string): ID do usuário a ser atualizado
+- **Body (JSON):**
+  ```json
+  {
+    "name": "Novo Nome",
+    "email": "novo@email.com"
+  }
 
-- `src/helpers/httpResponse.js`: Contém funções utilitárias para padronizar as respostas HTTP da API.
+## Plates API
 
-- `src/routes/orders.js`, `src/routes/plates.js`, `src/routes/users.js`: Definem as rotas da API para pedidos, pratos e usuários, respectivamente. Cada rota chama o controlador correspondente.
+###  Listar todos os pratos
 
-- `src/services/orders.js`, `src/services/plates.js`, `src/services/users.js`: Serviços que implementam a lógica de negócio e interagem com o banco de dados ou outras APIs, sendo utilizados pelos controladores.
+- **Endpoint:** `GET /plates`
+- **Descrição:** Retorna uma lista com todos os pratos disponíveis.
+- **Resposta esperada:**
+  ```json
+  {
+    "success": true,
+    "statusCode": 200,
+    "body": [
+      {
+        "id": "1",
+        "name": "Spaghetti Carbonara",
+        "price": 29.9,
+        "category": "Massas"
+      },
+      {
+        "id": "2",
+        "name": "Feijoada",
+        "price": 34.9,
+        "category": "Brasileira"
+      }
+      // ...outros pratos
+    ]
+  }
 
-Esses arquivos juntos estruturam uma API Node.js organizada em camadas (rotas, controladores, serviços, helpers e dados).
+### Listar pratos disponíveis
 
-# Resumo FrontEnd
+- **Endpoint:** `GET /plates/availables`
+- **Descrição:** Retorna apenas os pratos que estão atualmente disponíveis para pedido.
+- **Resposta esperada:**
+  ```json
+  {
+    "success": true,
+    "statusCode": 200,
+    "body": [
+      {
+        "id": "1",
+        "name": "Spaghetti Carbonara",
+        "price": 29.9,
+        "category": "Massas",
+        "available": true
+      },
+      {
+        "id": "3",
+        "name": "Salada Caesar",
+        "price": 19.9,
+        "category": "Saladas",
+        "available": true
+      }
+      // ...outros pratos disponíveis
+    ]
+  }
 
-- `index.html`: Arquivo HTML principal carregado pelo Vite, serve como base para o React renderizar a aplicação.
-- `package.json`: Gerencia dependências, scripts e configurações do projeto npm.
-- `vite.config.js`: Configuração do Vite, define como o projeto é construído e servido.
+### Cadastrar um novo prato
 
-**Pasta `public/`**  
-Arquivos estáticos acessíveis diretamente pelo navegador.
-- `imgs/`: Imagens usadas na aplicação.
-  - `logo.png`: Logo do projeto.
-  - `homepage/`: Imagens relacionadas à página inicial.
-  - `plates/`: Imagens dos pratos exibidos na aplicação.
+- **Endpoint:** `POST /plates`
+- **Descrição:** Cadastra um novo prato no sistema com as informações fornecidas.
+- **Body (JSON):**
+  ```json
+  {
+    "name": "Lasanha de Frango",
+    "price": 32.5,
+    "category": "Massas",
+    "available": true
+  }
 
-**Pasta `src/`**  
-Código-fonte principal da aplicação.
-- `App.jsx`: Componente principal, geralmente define rotas e layout base.
-- `main.jsx`: Ponto de entrada do React, renderiza o `App.jsx` no DOM.
-- `index.css`: Estilos globais da aplicação.
+### Deletar um prato
 
-**Pasta `components/`**  
-Componentes reutilizáveis:
-- `confirmOrderPopup/`: Popup de confirmação de pedido.
-- `footer/`: Rodapé do site.
-- `navbar/`: Barra de navegação.
-- `plateCard/`: Card de exibição de prato.
-- `platePopup/`: Popup com detalhes do prato.
-Cada subpasta tem um `.jsx` (componente) e um `.module.css` (estilo modular).
+- **Endpoint:** `DELETE /plates/:id`
+- **Parâmetros de URL:**
+  - `id` (string): ID do prato a ser deletado
+- **Descrição:** Remove um prato do sistema com base no ID fornecido.
+- **Resposta esperada:**
+  ```json
+  {
+    "success": true,
+    "statusCode": 200,
+    "body": {
+      "message": "Prato deletado com sucesso."
+    }
+  }
 
-**Pasta `contexts/`**  
-- `useCartContext.jsx`: Contexto React para gerenciar o estado do carrinho de compras.
+### Atualizar um prato
 
-**Pasta `pages/`**  
-Cada subpasta representa uma página da aplicação:
-- `auth/`: Página de autenticação (login/cadastro).
-- `cart/`: Página do carrinho.
-- `home/`: Página inicial.
-- `loading/`: Tela de carregamento.
-- `plates/`: Página de listagem de pratos.
-- `profile/`: Página de perfil do usuário.
-Cada página tem seu componente (`page.jsx`) e estilos próprios (`page.module.css`).
+- **Endpoint:** `PUT /plates/:id`
+- **Parâmetros de URL:**
+  - `id` (string): ID do prato a ser atualizado
+- **Body (JSON):**
+  ```json
+  {
+    "name": "Nome atualizado do prato",
+    "price": 35.0,
+    "category": "Categoria atualizada",
+    "available": true
+  }
 
-**Pasta `services/`**  
-Funções para comunicação com backend/API:
-- `auth.jsx`: Serviços de autenticação.
-- `order.jsx`: Serviços de pedidos.
-- `plates.jsx`: Serviços relacionados aos pratos.
+## Pedidos API
 
-Essa estrutura separa bem responsabilidades, facilita manutenção e escalabilidade do projeto.
+### Listar todos os pedidos
+
+- **Endpoint:** `GET /orders`
+- **Descrição:** Retorna a lista de todos os pedidos.
+- **Resposta esperada:**
+  ```json
+  {
+    "success": true,
+    "statusCode": 200,
+    "body": [ /* lista de pedidos */ ]
+  }
+
+### Listar pedidos por ID de usuário
+
+- **Endpoint:** `GET /orders/userorders/:id`
+- **Parâmetros de URL:**
+  - `id` (string): ID do usuário
+- **Descrição:** Retorna todos os pedidos feitos por um usuário específico.
+- **Resposta esperada:**
+  ```json
+  {
+    "success": true,
+    "statusCode": 200,
+    "body": [ /* pedidos do usuário */ ]
+  }
+
+### Criar um novo pedido
+
+- **Endpoint:** `POST /orders`
+- **Descrição:** Cria um novo pedido com os dados fornecidos.
+- **Body (JSON):**
+  ```json
+  {
+    /* dados do pedido */
+  }
+
+### Deletar um pedido
+
+- **Endpoint:** `DELETE /orders/:id`
+- **Parâmetros de URL:**
+  - `id` (string): ID do pedido a ser deletado
+- **Descrição:** Remove um pedido pelo ID informado.
+- **Resposta esperada:**
+  ```json
+  {
+    "success": true,
+    "statusCode": 200,
+    "body": {
+      "message": "Pedido deletado com sucesso."
+    }
+  }
+
+###  Atualizar um pedido
+
+- **Endpoint:** `PUT /orders/:id`
+- **Parâmetros de URL:**
+  - `id` (string): ID do pedido a ser atualizado
+- **Body (JSON):**
+  ```json
+  {
+    /* novos dados do pedido */
+  }
